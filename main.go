@@ -1,12 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
+	"strings"
 )
 
-func main(args []string) {
+func main() {
+
+	fmt.Println("executable " + os.Args[0])
+	fmt.Println("first argument " + os.Args[1])
+	name := os.Args[1]
 	htmlData := `
 	<html>
 	<head>
@@ -18,11 +24,13 @@ func main(args []string) {
 	</body>
 	</html>
 	`
-	fileHtml := os.Create("index.html")
+	fileHTML, err := os.Create("index.html")
 
-	BadExpr
 	if err != nil {
-		log.Fatal("")
+		log.Fatal("file not created ")
 	}
-	io.Copy(file.html, fileHtml)
+	defer fileHTML.Close()
+
+	data := strings.NewReader(htmlData)
+	io.Copy(fileHTML, data)
 }
