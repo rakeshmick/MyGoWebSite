@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	tpl, err := template.ParseFiles("tpl.gohtml")
+	tpl, err := template.ParseGlob("./templates/*")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -18,7 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = tpl.Execute(nf, nil)
+	err = tpl.ExecuteTemplate(nf, "one.gohtml", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
