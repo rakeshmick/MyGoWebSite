@@ -12,7 +12,11 @@ func init() {
 	tpl = template.Must(template.ParseGlob("templates/*"))
 }
 func main() {
-	err := tpl.ExecuteTemplate(os.Stdout, "tpl.gohtml", 43)
+	nf, err := os.Create("index.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = tpl.ExecuteTemplate(nf, "tpl.gohtml", 43)
 
 	if err != nil {
 		log.Fatal(err)
